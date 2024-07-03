@@ -1151,7 +1151,7 @@ Values:
     background-color: ${e=>e.disabled?"var(--devy-disabled-button-color)":"var(--tg-theme-button-color)"};
   }
 `,gce=ao.div`
-  background-color: var(--tg-theme-bg-color);
+  background-color: var(--tg-theme-secondary-bg-color)
   color: var(--tg-theme-text-color);
 
   min-height: 100vh;
