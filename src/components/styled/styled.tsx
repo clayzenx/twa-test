@@ -13,18 +13,14 @@ const ExtendedTonConnectButton: React.FC<ExtendedTonConnectButtonProps> = (props
 export const WalletConnectButton = styled(ExtendedTonConnectButton)`
   button {
     background-color: ${(props) =>
-    props.disabled ? "var(--tg-theme-hint-color)" : "var(--tg-theme-button-color)"};
+    props.disabled ? "var(--devy-disabled-button-color)" : "var(--tg-theme-button-color)"};
   }
 `
 
 export const StyledApp = styled.div`
-  background-color: #e8e8e8;
-  color: black;
+  background-color: var(--tg-theme-secondary-bg-color)
+  color: var(--tg-theme-text-color);
 
-  @media (prefers-color-scheme: dark) {
-    background-color: #222;
-    color: white;
-  }
   min-height: 100vh;
   padding: 20px 20px;
 `;
@@ -33,14 +29,11 @@ export const AppContainer = styled.div`
   max-width: 900px;
   margin: 0 auto;
 `;
+
 export const Card = styled.div`
   padding: 18px 20px;
   border-radius: 8px;
-  background-color: white;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #111;
-  }
+  background-color: var(--tg-theme-section-bg-color);
 `;
 
 export const FlexBoxRow = styled.div`
