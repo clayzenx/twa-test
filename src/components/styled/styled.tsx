@@ -1,5 +1,38 @@
 import styled from "styled-components";
+import { TonConnectButton, TonConnectButtonProps } from "@tonconnect/ui-react";
+import React from "react";
 
+interface ExtendedTonConnectButtonProps extends TonConnectButtonProps {
+  disabled?: boolean;
+}
+
+const ExtendedTonConnectButton: React.FC<ExtendedTonConnectButtonProps> = (props) => {
+  return <TonConnectButton {...props} />;
+};
+
+export const WalletConnectButton = styled(ExtendedTonConnectButton)`
+  button {
+    background-color: ${(props) =>
+    props.disabled ? "var(--tg-theme-hint-color)" : "var(--tg-theme-button-color)"};
+  }
+`
+
+export const StyledApp = styled.div`
+  background-color: #e8e8e8;
+  color: black;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #222;
+    color: white;
+  }
+  min-height: 100vh;
+  padding: 20px 20px;
+`;
+
+export const AppContainer = styled.div`
+  max-width: 900px;
+  margin: 0 auto;
+`;
 export const Card = styled.div`
   padding: 18px 20px;
   border-radius: 8px;
