@@ -1,9 +1,6 @@
 import "./App.css";
-import { Counter } from "./components/Counter";
-import { Jetton } from "./components/Jetton";
-import { TransferTon } from "./components/TransferTon";
-import styled from "styled-components";
 import { Button, FlexBoxCol, FlexBoxRow, StyledApp, AppContainer, WalletConnectButton } from "./components/styled/styled";
+import { Storefront } from "./components/Storefront";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { CHAIN } from "@tonconnect/protocol";
 import "@twa-dev/sdk";
@@ -25,9 +22,7 @@ function App() {
                 : "N/A"}
             </Button>
           </FlexBoxRow>
-          <Counter />
-          <TransferTon />
-          <Jetton />
+          <Storefront />
         </FlexBoxCol>
       </AppContainer>
     </StyledApp>

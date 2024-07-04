@@ -10,6 +10,18 @@ const ExtendedTonConnectButton: React.FC<ExtendedTonConnectButtonProps> = (props
   return <TonConnectButton {...props} />;
 };
 
+interface StorefrontProps extends React.HTMLAttributes<HTMLDivElement> {
+  type: 'list' | 'grid';
+}
+export const StorefrontContainer = styled.div.attrs<StorefrontProps>(props => ({
+  type: props.type || 'list'
+})) <StorefrontProps>`
+  display: grid;
+  grid-template-columns: repeat(${(props) => (props.type === 'list' ? 1 : 2)}, 1fr);
+  column-gap: 10px;
+  row-gap: 10px;
+`;
+
 export const WalletConnectButton = styled(ExtendedTonConnectButton)`
   button {
     background-color: ${(props) =>
