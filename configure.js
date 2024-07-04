@@ -37,14 +37,13 @@ let githubUsername, githubRepo, botUsername;
     const params = url.match(/github.com[/:]([^/]*)\/(.*)\.git/);
     githubUsername = params[1];
     githubRepo = params[2];
-  } catch (e) {}
+  } catch (e) { }
 
   const accessToken = await question("Enter your bot access token: ");
   if (!accessToken?.length > 0) exitError("Token is required");
 
   const githubUsernameQ = await question(
-    `Enter your github username${
-      githubUsername ? ` (${githubUsername})` : ``
+    `Enter your github username${githubUsername ? ` (${githubUsername})` : ``
     }: `
   );
   githubUsername = githubUsernameQ || githubUsername;
@@ -61,7 +60,8 @@ let githubUsername, githubRepo, botUsername;
   ).catch(exitError);
 
   botUsername = getBot.data.result.username;
-  const url = `https://${githubUsername}.github.io/${githubRepo}`;
+  const url = process.env.TG_WEBAPP_MODE === 'DEV' ? 'https://6a75-38-180-115-28.ngrok-free.app/' : `https://${githubUsername}.github.io/${githubRepo}`;
+  console.log('webapp running on', url);
 
   console.log(`\n\nSetting bot ${botUsername} webapp url to ${url}`);
 
@@ -70,7 +70,7 @@ let githubUsername, githubRepo, botUsername;
     {
       menu_button: {
         type: "web_app",
-        text: "Launch Webapp",
+        text: "Магазин",
         web_app: {
           url: url,
         },
