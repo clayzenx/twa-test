@@ -18,12 +18,12 @@ export function Storefront() {
 
   return (
     <StorefrontContainer type="grid">
-      {products.map(({ node }) =>
-        <Card key={node.id}>
-          <img src={node.featuredImage.url} style={{ width: '100%' }} />
-          <p>{node.title}</p>
-        </Card>
-      )}
+      {/* {products.map(({ node }) => */}
+      {/*   <Card key={node.id}> */}
+      {/*     <img src={node.featuredImage.url} style={{ width: '100%' }} /> */}
+      {/*     <p>{node.title}</p> */}
+      {/*   </Card> */}
+      {/* )} */}
     </StorefrontContainer>
   )
 }
