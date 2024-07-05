@@ -10,9 +10,9 @@ export function Storefront() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch('https://mock.shop/api?query={products(first:%2020){edges%20{node%20{id%20title%20description%20featuredImage%20{id%20url}%20variants(first:%203){edges%20{node%20{price%20{amount%20currencyCode}}}}}}}}')
+    fetch('https://6ddf-38-180-115-28.ngrok-free.app/api/products')
       .then(response => response.json())
-      .then(({ data: { products: { edges } } }) => console.log('data', setProducts(edges)))
+      .then(console.log)
   }, [])
   console.log('products', products)
 
