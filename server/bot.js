@@ -1,5 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
+const fs = require('fs');
 const bodyParser = require('body-parser');
 
 // Replace 'YOUR_BOT_TOKEN' and 'YOUR_PAYMENT_PROVIDER_TOKEN' with your actual tokens
@@ -10,6 +11,18 @@ const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 const app = express();
 
 app.use(bodyParser.json());
+
+// Load product data
+function loadProducts() {
+  try {
+    return JSON.parse(fs.readFileSync('products.json', 'utf8'));
+  } catch (err) {
+    console.error('Error reading products.json:', err);
+    return { products: [] };
+  }
+}
+
+let products = loadProducts();
 
 // Start command handler
 bot.onText(/\/start/, (msg) => {
@@ -42,10 +55,9 @@ bot.on('successful_payment', (msg) => {
   bot.sendMessage(msg.chat.id, "Thank you for your payment!");
 });
 
-// Express server setup for webhook (if needed)
-app.post(`/webhook/${BOT_TOKEN}`, (req, res) => {
-  bot.processUpdate(req.body);
-  res.sendStatus(200);
+app.get('/api/products', (req, res) => {
+  console.log('getting products', products);
+  res.json(products);
 });
 
 const PORT = process.env.PORT || 3000;
