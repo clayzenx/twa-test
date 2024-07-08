@@ -60,7 +60,7 @@ let githubUsername, githubRepo, botUsername;
   ).catch(exitError);
 
   botUsername = getBot.data.result.username;
-  const url = process.env.TG_WEBAPP_MODE === 'DEV' ? 'https://6a75-38-180-115-28.ngrok-free.app/' : `https://${githubUsername}.github.io/${githubRepo}`;
+  const url = process.env.TG_WEBAPP_MODE === 'DEV' ? 'https://3832-38-180-115-28.ngrok-free.app/' : `https://${githubUsername}.github.io/${githubRepo}`;
   console.log('webapp running on', url);
 
   console.log(`\n\nSetting bot ${botUsername} webapp url to ${url}`);

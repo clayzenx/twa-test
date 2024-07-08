@@ -10,20 +10,20 @@ export function Storefront() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch('https://6ddf-38-180-115-28.ngrok-free.app/api/products')
+    fetch('http://localhost:3000/api/products')
       .then(response => response.json())
-      .then(console.log)
+      .then(setProducts)
   }, [])
   console.log('products', products)
 
   return (
     <StorefrontContainer type="grid">
-      {/* {products.map(({ node }) => */}
-      {/*   <Card key={node.id}> */}
-      {/*     <img src={node.featuredImage.url} style={{ width: '100%' }} /> */}
-      {/*     <p>{node.title}</p> */}
-      {/*   </Card> */}
-      {/* )} */}
+      {products.map(({ id, name, description }) =>
+        <Card key={id}>
+          <p>{name}</p>
+          <p>{description}</p>
+        </Card>
+      )}
     </StorefrontContainer>
   )
 }

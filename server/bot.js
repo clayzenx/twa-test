@@ -1,6 +1,8 @@
 const TelegramBot = require('node-telegram-bot-api');
 const express = require('express');
 const fs = require('fs');
+const cors = require('cors');
+const multer = require('multer');
 const bodyParser = require('body-parser');
 
 // Replace 'YOUR_BOT_TOKEN' and 'YOUR_PAYMENT_PROVIDER_TOKEN' with your actual tokens
@@ -11,6 +13,19 @@ const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 const app = express();
 
 app.use(bodyParser.json());
+app.use(cors());
+
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, 'uploads/')  // Path where images will be stored
+  },
+  filename: function(req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname))
+  }
+});
+
+const upload = multer({ storage: storage });
 
 // Load product data
 function loadProducts() {
@@ -38,6 +53,24 @@ bot.onText(/\/start/, (msg) => {
     need_phone_number: false,
     need_email: false,
     need_shipping_address: false
+  });
+});
+
+// Handle /addimage command for uploading image
+bot.onText(/\/addimage (.+)/, (msg, match) => {
+  const productId = match[1]; // Extract product ID from command
+
+  bot.sendMessage(msg.chat.id, 'Please upload an image...').then(sent => {
+    const chatId = sent.chat.id;
+    bot.once('photo', async (photoMsg) => {
+      const fileId = photoMsg.photo[photoMsg.photo.length - 1].file_id;
+      const fileLink = await bot.getFileLink(fileId);
+
+      // Example: Save fileLink to product with productId in your database or JSON file
+      // Update your product data storage logic accordingly
+
+      bot.sendMessage(chatId, `Image added for product ID ${productId}.`);
+    });
   });
 });
 
