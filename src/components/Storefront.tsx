@@ -24,8 +24,8 @@ export function Storefront() {
     <StorefrontContainer type="grid">
       {products.map(({ id, attributes }) =>
         <Card key={id}>
-          <img src={attributes.images.data[0].attributes.url} style={{ width: "100%" }} />
-          <h3>{attributes.name}</h3>
+          <img src={(attributes as any).images.data[0].attributes.url} style={{ width: "100%" }} />
+          <h3>{(attributes as any).name}</h3>
         </Card>
       )}
     </StorefrontContainer>
