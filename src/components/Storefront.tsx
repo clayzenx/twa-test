@@ -10,18 +10,22 @@ export function Storefront() {
   const [products, setProducts] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/products')
+    fetch('https://engaging-birthday-6d0e6b30f8.strapiapp.com/api/products?populate=images')
       .then(response => response.json())
-      .then(setProducts)
+      .then(({ data, meta }) => setProducts(data))
   }, [])
   console.log('products', products)
 
+  // const getImage = (url: string) => {
+  //   return 'https://engaging-birthday-6d0e6b30f8.strapiapp.com' + url
+  // }
+
   return (
     <StorefrontContainer type="grid">
-      {products.map(({ id, name, description }) =>
+      {products.map(({ id, attributes }) =>
         <Card key={id}>
-          <p>{name}</p>
-          <p>{description}</p>
+          <img src={attributes.images.data[0].attributes.url} style={{ width: "100%" }} />
+          <h3>{attributes.name}</h3>
         </Card>
       )}
     </StorefrontContainer>
